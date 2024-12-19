@@ -38,7 +38,9 @@ archivo `.tool-versions` con las versiones usadas.
 * [**`02-io-bound/`**](./02-io-bound): en este caso se invocará una llamada a un
   servicio remoto. Este servicio demorará un tiempo que el proceso deberá
   esperar por IO. Entonces veremos cómo se comporan los threads acá.
-
+* [**`03-thread-inseguro/`**](./03-thread-inseguro): mostramos código no seguro
+  respecto de la concurrencia, que funciona gracias a GIL, pero no cuando
+  tenemos threads nativos.
 
 ## Métricas con prometheus
 
