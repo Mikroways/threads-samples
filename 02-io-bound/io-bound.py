@@ -1,31 +1,32 @@
 import sys
 import os
-import urllib.request
+import random
 import threading
 
-HTTP_CALL_DELAY_SECONDS=10
+FILE_SIZE_GB = 1.5
+TMP_FILE = "/tmp/io-bound-python"
 
 def usage(err):
+    print(f"Crea archivos en {TMP_FILE}-XX.dat cada uno de {FILE_SIZE_GB}GB")
     print(">> ERROR: ",err)
-    print("-s\tSecuencial")
-    print("-sm\tRepite ",os.cpu_count," el ejemplo secuencial")
-    print("-t\tTantos threads como CPUs (", os.cpu_count, ")")
+    print("-t NUM\tTantos threads como se indique. Cada thread crea un archivo")
     sys.exit(1)
 
-def do_io():
-    return urllib.request.urlopen(f"https://httpbin.org/delay/{HTTP_CALL_DELAY_SECONDS}").read()
+def do_io(num):
+    filename = f"{TMP_FILE}-{num}.dat"
+    file_size_bytes = int(FILE_SIZE_GB * 1024 * 1024 * 1024)
+    with open(filename, 'wb') as f:
+        for _ in range(file_size_bytes // 1024):  # Escribir bloques de 1 KB
+            f.write(random.randbytes(1024))
 
-if len(sys.argv) != 2 :
+if len(sys.argv) != 3 :
     usage("Faltan argumentos") 
 
-if sys.argv[1] == "-s":
-    print(do_io().decode('utf-8'))
-elif sys.argv[1] == "-sm":
-    for _ in range(os.cpu_count()):
-        do_io()
 elif sys.argv[1] == "-t":
-    for _ in range(os.cpu_count()):
-        threading.Thread(target=do_io).start()
+    num = int(sys.argv[2])
+    thread=0
+    for i in range(num):
+        threading.Thread(target=do_io, args=([i])).start()
     print("El PID del proceso actual es: ", os.getpid())
     print("Verificar con ps la cantidad de threads: ps -o nlwp -p ",
             os.getpid())

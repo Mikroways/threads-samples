@@ -45,7 +45,7 @@ end
 puts "El PID del proceso actual es: #{Process.pid}"
 puts "Verificar con ps la cantidad de threads: ps -o nlwp -p #{Process.pid}"
 puts "Ver los thread del proceso: ps -L -p #{Process.pid}"
-puts "Ver en tiempo real los roceso:  watch -n 1 ps -L -o pid,lwp,state,ucmd -p #{Process.pid}"
+puts "Ver en tiempo real los roceso:  watch -n 1 ps -L -o pid,lwp,psr,state,ucmd -p #{Process.pid}"
 
 # Procedemos con threads
 threads = []

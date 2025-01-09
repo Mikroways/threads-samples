@@ -15,7 +15,7 @@ public class Fibonacci {
             ProcessHandle.current().pid());
           System.out.println("Ver los thread del proceso: ps -L -p " +
             ProcessHandle.current().pid());
-          System.out.println("Ver en tiempo real los roceso:  watch -n 1 ps -L -o pid,lwp,state,ucmd -p " +
+          System.out.println("Ver en tiempo real los roceso:  watch -n 1 ps -L -o pid,lwp,psr,state,ucmd -p " +
             ProcessHandle.current().pid());
         }else {
           if (args[0].equals("-s")) fib(50);

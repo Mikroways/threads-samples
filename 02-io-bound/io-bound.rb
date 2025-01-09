@@ -1,36 +1,34 @@
-require 'open-uri'
-require 'parallel'
+require 'securerandom'
 
-HTTP_CALL_DELAY_SECONDS=10
+FILE_SIZE_GB = 1.5
+TMP_FILE = "/tmp/io-bound-ruby"
 
 def usage(err)
+  puts "Crea archivos en #{TMP_FILE}-XX.dat cada uno de #{FILE_SIZE_GB}GB"
   puts ">> ERROR: #{err}"
-  puts "-s\tSecuencial"
-  puts "-sm\tRepite #{Parallel.processor_count} el ejemplo secuencial"
-  puts "-t\tTantos threads como CPUs (#{Parallel.processor_count})"
+  puts "-t NUM\tTantos threads como se indique. Cada thread crea un archivo"
   exit 1
 end
 
-def do_io
-  URI.open "https://httpbin.org/delay/#{HTTP_CALL_DELAY_SECONDS}" do |io|
-    io.read
-  end
+def do_io(num)
+    filename = "#{TMP_FILE}-#{num}.dat"
+    File.open(filename, 'wb') do |file|
+      file_size_bytes = (FILE_SIZE_GB * 1024 * 1024).to_i
+      file_size_bytes.times do
+        file.write(SecureRandom.random_bytes(1024)) # Escribe bloques de 1 KB
+      end
+    end
 end
 
 
 
-usage("Faltan argumentos") if ARGV.length != 1
-case ARGV.pop
-  when "-s"
-    puts do_io
-    exit 0
-  when "-sm"
-    Parallel.processor_count.times { do_io }
-    exit 0
+usage("Faltan argumentos") if ARGV.length != 2
+case ARGV.shift
   when "-t"
+    count = ARGV.shift.to_i
     threads = []
-    Parallel.processor_count.times do 
-      threads << Thread.new { do_io }
+    count.times do |i|
+      threads << Thread.new { do_io(i) }
     end
     puts "El PID del proceso actual es: #{Process.pid}"
     puts "Verificar con ps la cantidad de threads: ps -o nlwp -p #{Process.pid}"

@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    parallel (1.26.3)
+
+PLATFORMS
+  universal-java-20
+
+DEPENDENCIES
+  parallel (~> 1.24)
+
+BUNDLED WITH
+   2.3.26

@@ -29,6 +29,7 @@ python fibonacci.py
 Corremos directamente con:
 
 ```bash
+bundle
 ruby fibonacci.rb
 ```
 

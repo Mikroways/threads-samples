@@ -29,7 +29,7 @@ elif sys.argv[1] == "-t":
     print("Verificar con ps la cantidad de threads: ps -o nlwp -p ",
             os.getpid())
     print("Ver los thread del proceso: ps -L -p ", os.getpid())
-    print("Ver en tiempo real los roceso:  watch -n 1 ps -L -o pid,lwp,state,ucmd -p ",
+    print("Ver en tiempo real los roceso:  watch -n 1 ps -L -o pid,lwp,psr,state,ucmd -p ",
             os.getpid())
 else:
     usage("Bad argument")
