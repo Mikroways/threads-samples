@@ -25,7 +25,7 @@ Las herramientas que usamos, por el momento contempla los siguientes lenguajes:
 
 ### Trabajando con vagrant
 
-Simplemente tenés que tener instalado [vagrant](https://www.vagrantup.com/) y
+Tenés que tener instalado [vagrant](https://www.vagrantup.com/) y
 [VirtualBox](https://www.virtualbox.org/). Luego simplemente corrés:
 
 ```bash
