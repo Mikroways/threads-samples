@@ -62,8 +62,8 @@ archivo `.tool-versions` con las versiones usadas.
   Fibonacci hasta un número. Elegimos esta función porque está estrechamente
   ligada al uso de CPU. La idea es analizar el uso de la CPU con y sin threads.
 * [**`02-io-bound/`**](./02-io-bound): en este caso se invocará una llamada a un
-  servicio remoto. Este servicio demorará un tiempo que el proceso deberá
-  esperar por IO. Entonces veremos cómo se comporan los threads acá.
+  thread que haec uso intenso de escrituras al disco. Esto generará la espera de
+  IO permitiéndonos ver cómo se comportan los threads acá.
 * [**`03-thread-inseguro/`**](./03-thread-inseguro): mostramos código no seguro
   respecto de la concurrencia, que funciona gracias a GIL, pero no cuando
   tenemos threads nativos. Es interesante ver como funcionan los ejemplos de
