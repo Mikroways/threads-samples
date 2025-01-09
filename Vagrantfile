@@ -30,6 +30,6 @@ Vagrant.configure("2") do |config|
     su - vagrant -c ".  ~/.asdf/asdf.sh && echo Install latest direnv plugin && asdf install direnv latest && asdf global direnv latest && asdf direnv setup --shell bash --version latest"
     su - vagrant -c ".  ~/.asdf/asdf.sh && echo Allow direnv work directories && cd /vagrant && direnv allow && asdf direnv install"
     su - vagrant -c ".  ~/.asdf/asdf.sh && echo Allow direnv work directories && cd /vagrant/03-thread-inseguro && direnv allow && asdf direnv install"
-    docker compose -f -f /vagrant/prometheus/docker-compose.yml up -d
+    docker compose -f /vagrant/prometheus/docker-compose.yml up -d
   SHELL
 end
