@@ -1,14 +1,7 @@
 # Qué hace este ejemplo
 
-Invocar al endpoint de httpbin que impone un delay:
-
-```
-https://httpbin.org/delay/HTTP_CALL_DELAY_SECONDS
-```
-
-El delay máximo es de 10 segundos. Lo interesante es que cuando el proceso
-espera por la respuesta del servicio, queda en io wait. Veamos qué podemos
-inferir ahora respecto a los threads.
+Crea archivos de 1.5GB en el /tmp. Para ello utilizará tantos threads como se
+indique. Cada thread creará un archivo diferente.
 
 ## Como se corren estos ejemplos
 
